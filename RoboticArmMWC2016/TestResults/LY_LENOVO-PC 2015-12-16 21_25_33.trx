@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="2a4f0785-e76a-464c-ade7-b8d10b0f1a4a" name="LY@LENOVO-PC 2015-12-16 21:25:33" runUser="Lenovo-PC\LY" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="本地" id="f73eee50-19b4-4180-bbe8-09f466415bc6">
+    <Description>这些设置为本地测试运行的默认测试设置。</Description>
+    <Deployment enabled="false" runDeploymentRoot="LY_LENOVO-PC 2015-12-16 21_25_33">
+      <DeploymentItem filename="E:\code\code2016\RoboticArmMWC2016\sourceCode\dll\AForge.Imaging.dll" />
+      <DeploymentItem filename="E:\code\code2016\RoboticArmMWC2016\sourceCode\dll\AForge.dll" />
+      <DeploymentItem filename="E:\code\code2016\RoboticArmMWC2016\sourceCode\dll\dshow.dll" />
+      <DeploymentItem filename="E:\code\code2016\RoboticArmMWC2016\sourceCode\dll\AForge.Math.dll" />
+      <DeploymentItem filename="E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\MotionDetection\bin\Debug\MotionDetection.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2015-12-16T21:25:33.4534404+08:00" queuing="2015-12-16T21:25:34.8238272+08:00" start="2015-12-16T21:25:34.9269002+08:00" finish="2015-12-16T21:27:27.1351864+08:00" />
+  <ResultSummary outcome="Error">
+    <Counters total="2" executed="1" error="0" failed="0" timeout="0" aborted="1" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="1" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+    <RunInfos>
+      <RunInfo computerName="LENOVO-PC" outcome="Error" timestamp="2015-12-16T21:27:27.1341851+08:00">
+        <Text>测试宿主进程意外退出。</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="CalcEndPointTest" storage="e:\code\code2016\roboticarmmwc2016\sourcecode\roboticarmmwc2016\testproject1\bin\debug\testproject1.dll" id="020dfcc7-263f-1b2d-22c4-1ab586b18c94">
+      <Execution id="df90b6ad-b587-4785-99cd-a2bb0c69bd95" />
+      <TestMethod codeBase="E:/code/code2016/RoboticArmMWC2016/sourceCode/RoboticArmMWC2016/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.MotionEndPointCalcTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="CalcEndPointTest" />
+    </UnitTest>
+    <UnitTest name="MotionAngleTest" storage="e:\code\code2016\roboticarmmwc2016\sourcecode\roboticarmmwc2016\testproject1\bin\debug\testproject1.dll" id="3c43eb3c-f4f3-1b7f-e869-17a0c95a0407">
+      <DeploymentItems>
+        <DeploymentItem filename="MotionDetection.dll" />
+      </DeploymentItems>
+      <Execution id="7263b88d-0c61-46a5-9db4-41bf12e261b7" />
+      <TestMethod codeBase="E:/code/code2016/RoboticArmMWC2016/sourceCode/RoboticArmMWC2016/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.MotionEndPointCalcTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="MotionAngleTest" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="020dfcc7-263f-1b2d-22c4-1ab586b18c94" executionId="df90b6ad-b587-4785-99cd-a2bb0c69bd95" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3c43eb3c-f4f3-1b7f-e869-17a0c95a0407" executionId="7263b88d-0c61-46a5-9db4-41bf12e261b7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="df90b6ad-b587-4785-99cd-a2bb0c69bd95" testId="020dfcc7-263f-1b2d-22c4-1ab586b18c94" testName="CalcEndPointTest" computerName="LENOVO-PC" duration="00:01:52.1352170" startTime="2015-12-16T21:25:34.9999694+08:00" endTime="2015-12-16T21:27:27.1351864+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Aborted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="df90b6ad-b587-4785-99cd-a2bb0c69bd95">
+    </UnitTestResult>
+    <UnitTestResult executionId="7263b88d-0c61-46a5-9db4-41bf12e261b7" testId="3c43eb3c-f4f3-1b7f-e869-17a0c95a0407" testName="MotionAngleTest" computerName="LENOVO-PC" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7263b88d-0c61-46a5-9db4-41bf12e261b7">
+    </UnitTestResult>
+  </Results>
+</TestRun>

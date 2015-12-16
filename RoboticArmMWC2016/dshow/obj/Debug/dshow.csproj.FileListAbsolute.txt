@@ -1,0 +1,12 @@
+C:\Users\User\Desktop\motion_src\dshow\bin\Debug\dshow.dll
+C:\Users\User\Desktop\motion_src\dshow\bin\Debug\dshow.pdb
+C:\Users\User\Desktop\motion_src\dshow\obj\Debug\dshow.dll
+C:\Users\User\Desktop\motion_src\dshow\obj\Debug\dshow.pdb
+E:\code\code2016\RoboticArmMWC2016\motionSample\dshow\bin\Debug\dshow.dll
+E:\code\code2016\RoboticArmMWC2016\motionSample\dshow\bin\Debug\dshow.pdb
+E:\code\code2016\RoboticArmMWC2016\motionSample\dshow\obj\Debug\dshow.dll
+E:\code\code2016\RoboticArmMWC2016\motionSample\dshow\obj\Debug\dshow.pdb
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\dshow\bin\Debug\dshow.dll
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\dshow\bin\Debug\dshow.pdb
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\dshow\obj\Debug\dshow.dll
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\dshow\obj\Debug\dshow.pdb

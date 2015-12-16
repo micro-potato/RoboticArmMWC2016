@@ -1,0 +1,13 @@
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\TestProject1\bin\Debug\TestProject1.dll
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\TestProject1\bin\Debug\TestProject1.pdb
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\TestProject1\bin\Debug\AForge.dll
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\TestProject1\bin\Debug\AForge.Imaging.dll
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\TestProject1\bin\Debug\AForge.Math.dll
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\TestProject1\bin\Debug\dshow.dll
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\TestProject1\bin\Debug\MotionDetection.dll
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\TestProject1\bin\Debug\MotionDetection.pdb
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\TestProject1\bin\Debug\MotionDetection_Accessor.dll
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\TestProject1\bin\Debug\MotionDetection_Accessor.pdb
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\TestProject1\obj\Debug\TestProject1.csprojResolveAssemblyReference.cache
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\TestProject1\obj\Debug\TestProject1.dll
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\TestProject1\obj\Debug\TestProject1.pdb

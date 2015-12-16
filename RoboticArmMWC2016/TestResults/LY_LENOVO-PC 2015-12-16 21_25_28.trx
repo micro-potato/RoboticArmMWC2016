@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="54318662-abac-4d5a-8de2-5a05db15b047" name="LY@LENOVO-PC 2015-12-16 21:25:28" runUser="Lenovo-PC\LY" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="本地" id="f73eee50-19b4-4180-bbe8-09f466415bc6">
+    <Description>这些设置为本地测试运行的默认测试设置。</Description>
+    <Deployment enabled="false" runDeploymentRoot="LY_LENOVO-PC 2015-12-16 21_25_28">
+      <DeploymentItem filename="E:\code\code2016\RoboticArmMWC2016\sourceCode\dll\AForge.Imaging.dll" />
+      <DeploymentItem filename="E:\code\code2016\RoboticArmMWC2016\sourceCode\dll\AForge.dll" />
+      <DeploymentItem filename="E:\code\code2016\RoboticArmMWC2016\sourceCode\dll\dshow.dll" />
+      <DeploymentItem filename="E:\code\code2016\RoboticArmMWC2016\sourceCode\dll\AForge.Math.dll" />
+      <DeploymentItem filename="E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\MotionDetection\bin\Debug\MotionDetection.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2015-12-16T21:25:28.3951278+08:00" queuing="2015-12-16T21:25:28.6121913+08:00" start="2015-12-16T21:25:28.6632099+08:00" finish="2015-12-16T21:25:29.0304716+08:00" />
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="CalcEndPointTest" storage="e:\code\code2016\roboticarmmwc2016\sourcecode\roboticarmmwc2016\testproject1\bin\debug\testproject1.dll" id="020dfcc7-263f-1b2d-22c4-1ab586b18c94">
+      <Execution id="af5b30ee-97fe-4a16-a68f-6ec39496faab" />
+      <TestMethod codeBase="E:/code/code2016/RoboticArmMWC2016/sourceCode/RoboticArmMWC2016/TestProject1/bin/Debug/TestProject1.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestProject1.MotionEndPointCalcTest, TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="CalcEndPointTest" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="列表中未列出的结果" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="所有已加载的结果" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="020dfcc7-263f-1b2d-22c4-1ab586b18c94" executionId="af5b30ee-97fe-4a16-a68f-6ec39496faab" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="af5b30ee-97fe-4a16-a68f-6ec39496faab" testId="020dfcc7-263f-1b2d-22c4-1ab586b18c94" testName="CalcEndPointTest" computerName="LENOVO-PC" duration="00:00:00.0377194" startTime="2015-12-16T21:25:28.7102446+08:00" endTime="2015-12-16T21:25:28.9894415+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="af5b30ee-97fe-4a16-a68f-6ec39496faab">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.AreEqual 失败。应为: &lt;True&gt;，实际为: &lt;False&gt;。</Message>
+          <StackTrace>   在 TestProject1.MotionEndPointCalcTest.CalcEndPointTest() 位置 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\TestProject1\MotionEndPointCalcTest.cs:行号 99
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>
