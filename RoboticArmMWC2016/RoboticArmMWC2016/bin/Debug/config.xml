@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Data>
+  <RValue>221</RValue>
+  <GValue>0</GValue>
+  <BValue>54</BValue>
+  <ColorThreshold>50</ColorThreshold>
+  <IP>172.31.1.147</IP>
+  <Port>30001</Port>
+  <DetectFrequency>100</DetectFrequency>
+  <ReflectVelocity>0</ReflectVelocity><!--机械臂能够反应的最大速度（cm/ms）-->
+  <CameraXID>0</CameraXID>
+  <CameraYID>-1</CameraYID>
+  <CameraX2ID>-1</CameraX2ID>
+</Data>

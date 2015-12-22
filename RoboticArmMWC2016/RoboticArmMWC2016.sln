@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoboticArmMWC2016", "RoboticArmMWC2016\RoboticArmMWC2016.csproj", "{B13340BA-CE95-47A5-8F2A-09AB87B6E522}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotionDetection", "MotionDetection\MotionDetection.csproj", "{A9459274-C5D2-4274-8C96-6CCBC8B9EFA4}"
@@ -13,6 +13,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		RoboticArmMWC2016.vsmdi = RoboticArmMWC2016.vsmdi
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "Helpers\Helpers.csproj", "{5777E1DC-3A49-4628-BEF1-9BB66C51B047}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientDLL", "SocketClientDLL\ClientDLL.csproj", "{07E1D099-5FBD-4AA2-B24B-289BDCA0B7A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoboticArm", "ArmController\RoboticArm.csproj", "{20CB630B-8C9B-417F-975A-6321AE880E4A}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -57,6 +63,36 @@ Global
 		{D6994D56-D6AE-4060-BA31-FA0B589FF8E6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D6994D56-D6AE-4060-BA31-FA0B589FF8E6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D6994D56-D6AE-4060-BA31-FA0B589FF8E6}.Release|x86.ActiveCfg = Release|Any CPU
+		{5777E1DC-3A49-4628-BEF1-9BB66C51B047}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5777E1DC-3A49-4628-BEF1-9BB66C51B047}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5777E1DC-3A49-4628-BEF1-9BB66C51B047}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5777E1DC-3A49-4628-BEF1-9BB66C51B047}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5777E1DC-3A49-4628-BEF1-9BB66C51B047}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5777E1DC-3A49-4628-BEF1-9BB66C51B047}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5777E1DC-3A49-4628-BEF1-9BB66C51B047}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5777E1DC-3A49-4628-BEF1-9BB66C51B047}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5777E1DC-3A49-4628-BEF1-9BB66C51B047}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5777E1DC-3A49-4628-BEF1-9BB66C51B047}.Release|x86.ActiveCfg = Release|Any CPU
+		{07E1D099-5FBD-4AA2-B24B-289BDCA0B7A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07E1D099-5FBD-4AA2-B24B-289BDCA0B7A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07E1D099-5FBD-4AA2-B24B-289BDCA0B7A5}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{07E1D099-5FBD-4AA2-B24B-289BDCA0B7A5}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{07E1D099-5FBD-4AA2-B24B-289BDCA0B7A5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{07E1D099-5FBD-4AA2-B24B-289BDCA0B7A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07E1D099-5FBD-4AA2-B24B-289BDCA0B7A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07E1D099-5FBD-4AA2-B24B-289BDCA0B7A5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{07E1D099-5FBD-4AA2-B24B-289BDCA0B7A5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{07E1D099-5FBD-4AA2-B24B-289BDCA0B7A5}.Release|x86.ActiveCfg = Release|Any CPU
+		{20CB630B-8C9B-417F-975A-6321AE880E4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20CB630B-8C9B-417F-975A-6321AE880E4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20CB630B-8C9B-417F-975A-6321AE880E4A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{20CB630B-8C9B-417F-975A-6321AE880E4A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{20CB630B-8C9B-417F-975A-6321AE880E4A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{20CB630B-8C9B-417F-975A-6321AE880E4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20CB630B-8C9B-417F-975A-6321AE880E4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20CB630B-8C9B-417F-975A-6321AE880E4A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{20CB630B-8C9B-417F-975A-6321AE880E4A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{20CB630B-8C9B-417F-975A-6321AE880E4A}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

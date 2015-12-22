@@ -1,0 +1,9 @@
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\ArmController\obj\Debug\RoboticArm.csprojResolveAssemblyReference.cache
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\ArmController\bin\Debug\RoboticArm.dll
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\ArmController\bin\Debug\RoboticArm.pdb
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\ArmController\bin\Debug\ClientDLL.dll
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\ArmController\bin\Debug\Helpers.dll
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\ArmController\bin\Debug\Helpers.pdb
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\ArmController\bin\Debug\ClientDLL.pdb
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\ArmController\obj\Debug\RoboticArm.dll
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\ArmController\obj\Debug\RoboticArm.pdb

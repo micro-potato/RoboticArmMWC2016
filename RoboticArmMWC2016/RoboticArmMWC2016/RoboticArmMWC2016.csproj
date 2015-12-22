@@ -101,6 +101,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ArmController\RoboticArm.csproj">
+      <Project>{20cb630b-8c9b-417f-975a-6321ae880e4a}</Project>
+      <Name>RoboticArm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Helpers\Helpers.csproj">
+      <Project>{5777E1DC-3A49-4628-BEF1-9BB66C51B047}</Project>
+      <Name>Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MotionDetection\MotionDetection.csproj">
       <Project>{A9459274-C5D2-4274-8C96-6CCBC8B9EFA4}</Project>
       <Name>MotionDetection</Name>

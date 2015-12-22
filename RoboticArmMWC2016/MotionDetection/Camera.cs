@@ -7,6 +7,8 @@ namespace MotionDetection
 {
     using System;
     using System.Drawing;
+    using System.Drawing.Imaging;
+    using System.Runtime.InteropServices;
     using System.Threading;
     using VideoSource;
 
@@ -16,7 +18,7 @@ namespace MotionDetection
     public class Camera
     {
         private IVideoSource videoSource = null;
-        private MotionDetector motionDetecotor = null;
+        private ColorSelecter motionDetecotor = null;
         private Bitmap lastFrame = null;
 
         // image width and height
@@ -60,7 +62,7 @@ namespace MotionDetection
             get { return (videoSource == null) ? false : videoSource.Running; }
         }
         // MotionDetector property
-        public MotionDetector MotionDetector
+        public ColorSelecter MotionDetector
         {
             get { return motionDetecotor; }
             set { motionDetecotor = value; }
@@ -72,12 +74,6 @@ namespace MotionDetection
             this.videoSource = source;
             videoSource.NewFrame += new CameraEventHandler(video_NewFrame);
         }
-        //public Camera(IVideoSource source, MotionDetector detector)
-        //{
-        //    this.videoSource = source;
-        //    this.motionDetecotor = detector;
-        //    videoSource.NewFrame += new CameraEventHandler(video_NewFrame);
-        //}
 
         // Start video source
         public void Start()
@@ -165,10 +161,46 @@ namespace MotionDetection
                 // unlock
                 Monitor.Exit(this);
             }
-
             // notify client
             if (NewFrame != null)
                 NewFrame(this, new EventArgs());
+        }
+
+        public Color GetColorofPoint(int x, int y)
+        {
+            try
+            {
+                Monitor.Enter(this);
+                Bitmap bitmap = (Bitmap)this.lastFrame.Clone();
+                var width = bitmap.Width;
+                var height = bitmap.Height;
+                BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, width, height),
+                    ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+                #region 颜色点
+                Color clr = Color.Empty;
+                var depth = Bitmap.GetPixelFormatSize(bitmap.PixelFormat);
+                int cCount = depth / 8;
+                var pixels = new byte[this.width * this.height * cCount];
+                var Iptr = bitmapData.Scan0;
+                var t = ((y * this.width) + x) * cCount;
+                // Copy data from pointer to array
+                Marshal.Copy(Iptr, pixels, 0, pixels.Length);
+                if (depth == 24) // For 24 bpp get Red, Green and Blue
+                {
+                    byte b = pixels[t];
+                    byte g = pixels[t + 1];
+                    byte r = pixels[t + 2];
+                    clr = Color.FromArgb(r, g, b);
+                }
+                #endregion
+                Monitor.Exit(this);
+                bitmap.Dispose();
+                return clr;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("未能获取颜色：" + e.Message);
+            }
         }
     }
 }

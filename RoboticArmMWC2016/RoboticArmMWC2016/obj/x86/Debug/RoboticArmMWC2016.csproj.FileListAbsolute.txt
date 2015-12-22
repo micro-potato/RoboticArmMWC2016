@@ -7,10 +7,13 @@ E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC201
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\obj\x86\Debug\RoboticArmMWC2016.pdb
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\bin\Debug\dshow.dll
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\bin\Debug\MotionDetection.dll
-E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\bin\Debug\AForge.Imaging.dll
-E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\bin\Debug\AForge.Math.dll
-E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\bin\Debug\AForge.dll
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\bin\Debug\MotionDetection.pdb
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\obj\x86\Debug\RoboticArmMWC2016.csprojResolveAssemblyReference.cache
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\obj\x86\Debug\RoboticArmMWC2016.MonitorForm.resources
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\obj\x86\Debug\RoboticArmMWC2016.CalcTestForm.resources
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\bin\Debug\Helpers.dll
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\bin\Debug\Helpers.pdb
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\bin\Debug\RoboticArm.dll
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\bin\Debug\ClientDLL.dll
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\bin\Debug\RoboticArm.pdb
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\bin\Debug\ClientDLL.pdb

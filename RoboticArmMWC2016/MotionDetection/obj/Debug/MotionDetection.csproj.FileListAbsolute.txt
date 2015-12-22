@@ -6,4 +6,6 @@ E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\MotionDetection\
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\MotionDetection\bin\Debug\AForge.Imaging.dll
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\MotionDetection\bin\Debug\AForge.Math.dll
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\MotionDetection\bin\Debug\dshow.dll
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\MotionDetection\bin\Debug\Helpers.dll
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\MotionDetection\bin\Debug\Helpers.pdb
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\MotionDetection\obj\Debug\MotionDetection.csprojResolveAssemblyReference.cache

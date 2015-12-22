@@ -67,6 +67,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Helpers\Helpers.csproj">
+      <Project>{5777E1DC-3A49-4628-BEF1-9BB66C51B047}</Project>
+      <Name>Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MotionDetection\MotionDetection.csproj">
       <Project>{A9459274-C5D2-4274-8C96-6CCBC8B9EFA4}</Project>
       <Name>MotionDetection</Name>

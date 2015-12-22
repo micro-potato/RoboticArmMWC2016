@@ -15,6 +15,7 @@ namespace VideoSource
 
 	using dshow;
 	using dshow.Core;
+    using System.Runtime.InteropServices.ComTypes;
 
 	/// <summary>
 	/// CaptureDevice - capture video from local device
@@ -183,8 +184,8 @@ namespace VideoSource
 				graph = (IGraphBuilder) graphObj;
 
 				// ----
-				UCOMIBindCtx bindCtx = null;
-				UCOMIMoniker moniker = null;
+                UCOMIBindCtx bindCtx = null;
+                UCOMIMoniker moniker = null;
 				int n = 0;
 
 				// create bind context

@@ -1,6 +1,7 @@
 ﻿using MotionDetection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using Helpers;
 
 namespace TestProject1
 {
@@ -13,8 +14,6 @@ namespace TestProject1
     [TestClass()]
     public class MotionEndPointCalcTest
     {
-
-
         private TestContext testContextInstance;
 
         /// <summary>
@@ -71,13 +70,7 @@ namespace TestProject1
         [DeploymentItem("MotionDetection.dll")]
         public void MotionAngleTest()
         {
-            double dx = 0; // TODO: 初始化为适当的值
-            double dy = 5; // TODO: 初始化为适当的值
-            double expected = Math.PI/2; // TODO: 初始化为适当的值
-            double actual;
-            actual = MotionEndPointCalc_Accessor.MotionAngle(dx, dy);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("验证此测试方法的正确性。");
+            
         }
 
         /// <summary>
@@ -86,18 +79,27 @@ namespace TestProject1
         [TestMethod()]
         public void CalcEndPointTest()
         {
-            MotionEndPointCalc.tableHeight = 10;
-            MotionEndPointCalc.tableWidth = 5;
-            double x1 = 5; // TODO: 初始化为适当的值
-            double y1 = 0; // TODO: 初始化为适当的值
-            double x2 = 2.5; // TODO: 初始化为适当的值
-            double y2 = 1.25; // TODO: 初始化为适当的值
-            double expected = 5; // TODO: 初始化为适当的值
-            double actual;
-            actual = MotionEndPointCalc.CalcEndPoint(x1, y1, x2, y2);
-            bool isSuccess = Math.Abs(expected - actual) < 1 ? true : false;
-            Assert.IsTrue(isSuccess);
+            //MotionEndPointCalc._tableHeight = 10;
+            //MotionEndPointCalc._tableWidth = 5;
+            //double x1 = 5; // TODO: 初始化为适当的值
+            //double y1 = 0; // TODO: 初始化为适当的值
+            //double x2 = 2.5; // TODO: 初始化为适当的值
+            //double y2 = 1.25; // TODO: 初始化为适当的值
+            //double expected = 5; // TODO: 初始化为适当的值
+            //double actual;
+            //actual = MotionEndPointCalc.CalcEndPoint(x1, y1, x2, y2);
+            //bool isSuccess = Math.Abs(expected - actual) < 1 ? true : false;
+            //Assert.IsTrue(isSuccess);
             //Assert.Inconclusive("验证此测试方法的正确性。");
+        }
+
+        [TestMethod]
+        public void TestConfig()
+        {
+            ConfigHelper.GetInstance().ResolveConfig(@"E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\bin\Debug\config.xml");
+            Assert.AreEqual(255, ConfigHelper.GetInstance().RValue);
+            Assert.AreEqual(255, ConfigHelper.GetInstance().BValue);
+            Assert.AreEqual(5, ConfigHelper.GetInstance().ColorThreshold);
         }
     }
 }
