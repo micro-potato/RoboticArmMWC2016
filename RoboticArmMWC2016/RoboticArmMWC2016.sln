@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientDLL", "SocketClientDL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoboticArm", "ArmController\RoboticArm.csproj", "{20CB630B-8C9B-417F-975A-6321AE880E4A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerDLL", "ServerDLL\ServerDLL.csproj", "{7A5748D4-46B1-4649-BF7D-94B790E84410}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = RoboticArmMWC2016.vsmdi
@@ -93,6 +95,16 @@ Global
 		{20CB630B-8C9B-417F-975A-6321AE880E4A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{20CB630B-8C9B-417F-975A-6321AE880E4A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{20CB630B-8C9B-417F-975A-6321AE880E4A}.Release|x86.ActiveCfg = Release|Any CPU
+		{7A5748D4-46B1-4649-BF7D-94B790E84410}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A5748D4-46B1-4649-BF7D-94B790E84410}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A5748D4-46B1-4649-BF7D-94B790E84410}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7A5748D4-46B1-4649-BF7D-94B790E84410}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7A5748D4-46B1-4649-BF7D-94B790E84410}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7A5748D4-46B1-4649-BF7D-94B790E84410}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A5748D4-46B1-4649-BF7D-94B790E84410}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A5748D4-46B1-4649-BF7D-94B790E84410}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7A5748D4-46B1-4649-BF7D-94B790E84410}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{7A5748D4-46B1-4649-BF7D-94B790E84410}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

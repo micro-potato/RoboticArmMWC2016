@@ -55,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Camera.cs" />
-    <Compile Include="CameraMotionDetector.cs" />
     <Compile Include="ColorSelecter.cs" />
     <Compile Include="MotionPointsManger.cs" />
     <Compile Include="MotionEndPointCalc.cs" />

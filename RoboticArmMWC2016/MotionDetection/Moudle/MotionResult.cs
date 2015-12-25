@@ -9,6 +9,6 @@ namespace MotionDetection.Moudle
     {
         public double EndPointX { get; set; }
         public double MoveVelocityY { get; set; }
-        public double DistancetoY { get; set; }
+        public double DistancetoY { get; set; }//cm/ms
     }
 }

@@ -23,7 +23,7 @@ namespace MotionDetection
             //桌子尺寸：厘米
             _tableWidth = 198;
             _tableHeight = 92;
-            _detectFrequency = config.DetectFrequency;
+            _detectFrequency = config.CameraFps;
         }
 
         /// <summary>

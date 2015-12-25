@@ -12,14 +12,10 @@ namespace RoboticArm
     {
         private AsyncClient asyncClient;
         private System.Timers.Timer asyncTimer = new System.Timers.Timer();
-        private char[] m_endChar = new char[] { '\n'};
         string _ip;
         int _port;
-        double _A1k, _A2k, _A3k, _A4k, _A2DownMax, _Y2excludeY1k, _P2excludeP1k;
-        private double[] _prevOffset = new double[6];
+        public double MaxVelocity { get; set; }
 
-        //Power
-        SerialPortHelper _serialPortHelper;
         public RobotHandler(string ip, int port)
         {
             _ip = ip;
@@ -54,13 +50,6 @@ namespace RoboticArm
 
         void client_onDataByteIn(byte[] SocketData)
         {
-            string cmd = System.Text.Encoding.UTF8.GetString(SocketData);
-            //this.Invoke(new DelSetText(SetText), new object[] { cmd });
-            string[] dataList = cmd.Split(m_endChar, StringSplitOptions.RemoveEmptyEntries);
-            foreach (string data in dataList)
-            {
-                //this.Invoke(new DelDataDeal(DataDeal), new object[] { data });
-            }
         }
 
         void client_onConnected()
@@ -109,12 +98,22 @@ namespace RoboticArm
         /// <summary>
         /// 移动机械臂至x,y，单位为厘米
         /// </summary>
-        public void MoveArm(double x,double y)
+        public void MoveArm(double endPointX,double yVelocity,double yDisance)
         {
             try
             {
-                asyncClient.Send(string.Format("{0}|{1}\r\n", x.ToString(), y.ToString()));
-                //LogHelper.GetInstance().ShowMsg("send to IIWA:=============" + data + "\n");
+                string dataString = string.Empty;
+                if (yVelocity >= this.MaxVelocity)
+                {
+                    dataString = "defence\r\n";
+                }
+                else
+                {
+                    var delayTime = yDisance / yVelocity;
+                    dataString = string.Format("{0}|{1}\r\n", endPointX.ToString(), delayTime.ToString());
+                }
+                asyncClient.Send(dataString);
+                LogHelper.GetInstance().ShowMsg("发送到机械臂:=============" + dataString + "\n");
             }
             catch (Exception e)
             {

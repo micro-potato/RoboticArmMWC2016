@@ -113,6 +113,10 @@
       <Project>{A9459274-C5D2-4274-8C96-6CCBC8B9EFA4}</Project>
       <Name>MotionDetection</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ServerDLL\ServerDLL.csproj">
+      <Project>{7a5748d4-46b1-4649-bf7d-94b790e84410}</Project>
+      <Name>ServerDLL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

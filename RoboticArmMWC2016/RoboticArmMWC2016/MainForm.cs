@@ -13,20 +13,23 @@ using MotionDetection;
 using System.Threading;
 using Helpers;
 using MotionDetection.Moudle;
+using ServerDLL;
+using System.Diagnostics;
 
 namespace RoboticArmMWC2016
 {
-    public partial class MainForm : Form
+    public partial class MainForm : Form,ILog
     {
-        private Camera _cameraX;
-        private Camera _cameraY;
-        private Camera _cameraX2;
-        private int _detectFrequency = 17;//监测频率，毫秒
+        private Camera _camera;
+        private int _cameraFpf;
         ConfigHelper _config;
         private List<string> _cameraList;
         private MotionColorInfo _motionColorInfo;
         private MotionPointsManger _motionPointManager;
         private RoboticArm.RobotHandler _robotHandler;
+        private ColorSelecter _colorSelector;
+        private AsyncServer asyncServer = new AsyncServer();
+        private List<int> m_ClientIndexs = new List<int>();
 
         //模拟数据
         private System.Timers.Timer _simTimer;
@@ -38,23 +41,7 @@ namespace RoboticArmMWC2016
         #region 监视画面
         private void buttonX_Click(object sender, EventArgs e)
         {
-            ShowMotionDection(_cameraX);
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //ShowMotionDection(1);
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //ShowMotionDection(2);
-        }
-
-
-        private void ShowMotionDection(Camera camera)
-        {
-            MonitorForm frm = new MonitorForm(camera,_motionColorInfo);
+            MonitorForm frm = new MonitorForm(_camera, _motionColorInfo);
             frm.Show();
         }
         #endregion
@@ -62,19 +49,90 @@ namespace RoboticArmMWC2016
         private void MainForm_Load(object sender, EventArgs e)
         {
             InitConfig();
-            _detectFrequency = _config.DetectFrequency;
             _motionColorInfo = new MotionColorInfo() { RValue = _config.RValue, GValue = _config.GValue, BValue = _config.BValue, ColorThreshold = _config.ColorThreshold };
+            _colorSelector = new ColorSelecter(_motionColorInfo);
             _motionPointManager = new MotionPointsManger();
             InitRoboticArm();
-            InitCameras();
-
-            _simTimer = new System.Timers.Timer(_config.DetectFrequency);
+            InitCamerDeviceList();
+            InitCamera(_config.CameraID,ref _camera);
+            LogHelper.GetInstance().RegLog(this);
+            InitServer();
+            //模拟数据
+            _simTimer = new System.Timers.Timer(1000/_config.CameraFps);
             _simTimer.Elapsed += _simTimer_Elapsed;
         }
 
+        #region Socket
+        private void InitServer()
+        {
+            if (asyncServer.Listen(_config.ServerPort, 2000))
+            {
+                asyncServer.onConnected += new AsyncServer.SocketConnected(asyncServer_onConnected);
+                asyncServer.onDisconnected += new AsyncServer.SocketDisconnected(asyncServer_onDisconnected);
+                asyncServer.onDataByteIn += new AsyncServer.SocketDataByteIn(asyncServer_onDataByteIn);
+            }
+            else
+            {
+                MessageBox.Show("该端口被占用，请重新配置!");
+                Process.GetCurrentProcess().Kill();
+            }
+        }
+
+        //客户端连线
+        void asyncServer_onConnected(int index, string ip)
+        {
+            string message = string.Format("{0}连线!", ip);
+            this.Invoke(new DeleString(SetText), new object[] { message });
+            System.Threading.Thread.Sleep(100);
+            if (!m_ClientIndexs.Contains(index))
+            {
+                m_ClientIndexs.Add(index);
+            }
+        }
+
+        //客户端断线
+        void asyncServer_onDisconnected(int index, string ip)
+        {
+            string message = string.Format("{0}断线!", ip);
+            LogHelper.GetInstance().ShowMsg(message);
+            if (m_ClientIndexs.Contains(index))
+            {
+                m_ClientIndexs.Remove(index);
+            }
+        }
+
+        //消息进入
+        void asyncServer_onDataByteIn(int index, string ip, byte[] SocketData)
+        {
+            try
+            {
+                string message = Encoding.UTF8.GetString(SocketData).Replace("\n", "");
+                LogHelper.GetInstance().ShowMsg(message);
+                string[] dataList = message.Split('|');//协议以|符号分割
+                foreach (string data in dataList)
+                {
+                    if (!String.IsNullOrEmpty(data))
+                    {
+                        this.Invoke(new DeleString(DealMsg), new object[] { data });
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+
+        private void DealMsg(string msg)
+        {
+            
+        }
+        #endregion
+
         private void InitRoboticArm()
         {
-            _robotHandler = new RoboticArm.RobotHandler(_config.IP, _config.Port);
+            _robotHandler = new RoboticArm.RobotHandler(_config.RobotIP, _config.RobotPort);
+            _robotHandler.MaxVelocity = _config.ReflectVelocity;
         }
 
         private void InitCamerDeviceList()
@@ -90,62 +148,32 @@ namespace RoboticArmMWC2016
             }
         }
 
-        private void InitCameras()
-        {
-            InitCamerDeviceList();
-            InitXCamera();
-            InitYCamera();
-            InitX2Camera();
-        }
-
-        private void InitXCamera()//捕捉X轴摄像头
-        {
-            InitCamera(_config.CameraXID, ref _cameraX);
-            CameraMotionDetector _cmdtorX = new CameraMotionDetector(_cameraX,_detectFrequency ,_motionColorInfo);
-            _cmdtorX.CenterPointGot += CameraX_CenterPointGot;
-        }
-
-        private void InitYCamera()//捕捉Y轴摄像头
-        {
-            InitCamera(_config.CameraYID, ref _cameraY);
-            CameraMotionDetector _cmdtorY = new CameraMotionDetector(_cameraY, _detectFrequency, _motionColorInfo);
-            _cmdtorY.CenterPointGot += CmdtorY_CenterPointGot;
-        }
-
-        private void InitX2Camera()//捕捉Y轴补充摄像头
-        {
-            InitCamera(_config.CameraX2ID, ref _cameraX2);
-            CameraMotionDetector _cmdorX2 = new CameraMotionDetector(_cameraX2, _detectFrequency, _motionColorInfo);
-            _cmdorX2.CenterPointGot += CmdorX2_CenterPointGot;
-        }
-
         private void InitCamera(string cameraIndex,ref Camera cameratoInit)
         {
             // create video source
-            if (cameraIndex == "-1")//没有该位置摄像头
+            if (cameraIndex == "-1")//没有摄像头
             {
                 return;
             }
             CaptureDevice videoSource = new CaptureDevice();
             videoSource.VideoSource = _cameraList[int.Parse(cameraIndex)];
             cameratoInit = new Camera(videoSource);
+            _cameraFpf = _config.CameraFps;
             cameratoInit.Start();
+            cameratoInit.NewFrame += Camera_NewFrame;
         }
 
-        void CameraX_CenterPointGot(List<Point> pointValue)
+        void Camera_NewFrame(object sender, EventArgs e)
         {
-            //_motionPointManager.AddPoint(MotionPointEnum.Xpoint, pointValue);
-        }
-
-        void CmdtorY_CenterPointGot(List<Point> pointValue)
-        {
-            //_motionPointManager.AddPoint(MotionPointEnum.Ypont, pointValue);
-            //_motionPointManager.UpdateResult();
-        }
-
-        void CmdorX2_CenterPointGot(List<Point> pointValue)
-        {
-            //_motionPointManager.AddPoint(MotionPointEnum.X2point, pointValue);
+            _camera.Lock();
+            var cameraImage =(Bitmap) _camera.LastFrame.Clone();
+            var iceballPoints = _colorSelector.DetectColorPoints(cameraImage);
+            var result = _motionPointManager.UpdateResult();
+            if (result != null)
+            {
+                _robotHandler.MoveArm(result.EndPointX, result.MoveVelocityY, result.DistancetoY);
+            }
+            _camera.Unlock();
         }
 
         private void InitConfig()
@@ -159,21 +187,7 @@ namespace RoboticArmMWC2016
             System.Diagnostics.Process.GetCurrentProcess().Kill();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        /// <summary>
-        /// 指定坐标移动
-        /// </summary>
-        private void button4_Click(object sender, EventArgs e)
-        {
-            var x = textBox1.Text;
-            var y = textBox2.Text;
-            _robotHandler.MoveArm(double.Parse(x), double.Parse(y));
-        }
-
+        #region 模拟数据
         private void button5_Click(object sender, EventArgs e)
         {
             _simTimer.Start();
@@ -186,8 +200,43 @@ namespace RoboticArmMWC2016
 
         void _simTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            var x = new Random().Next(92);
-            _robotHandler.MoveArm(x, 0);
+            SimOnce();
         }
+
+        private void SimOnce()
+        {
+            _simTimer.Stop();
+            var xEnd = new Random().Next(92);
+            var distance = new Random().Next(100);
+            double velocity = ((double)(new Random().Next(20)) / 20) * 100 / 100;
+            _robotHandler.MoveArm(xEnd, 0.8, distance);
+            var waitforNext = new Random().Next(1000);
+            _simTimer.Interval = waitforNext;
+            _simTimer.Start();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            _robotHandler.MoveArm(double.Parse(this.textBox1.Text), 0.8, 0.8);
+        }
+        #endregion
+
+        private delegate void DeleString(string arg);
+        public void ShowLog(string msg)
+        {
+            this.Invoke(new DeleString(SetText), msg);
+        }
+
+        private void SetText(string text)
+        {
+            this.InfoText.AppendText(text);
+            if (InfoText.Lines.Length > 5000)
+            {
+                InfoText.Clear();
+            }
+            this.InfoText.ScrollToCaret();
+        }
+
+        
     }
 }

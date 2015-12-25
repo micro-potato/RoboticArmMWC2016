@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Helpers;
+using MotionDetection.Moudle;
 
 namespace TestProject1
 {
@@ -79,18 +80,14 @@ namespace TestProject1
         [TestMethod()]
         public void CalcEndPointTest()
         {
-            //MotionEndPointCalc._tableHeight = 10;
-            //MotionEndPointCalc._tableWidth = 5;
-            //double x1 = 5; // TODO: 初始化为适当的值
-            //double y1 = 0; // TODO: 初始化为适当的值
-            //double x2 = 2.5; // TODO: 初始化为适当的值
-            //double y2 = 1.25; // TODO: 初始化为适当的值
-            //double expected = 5; // TODO: 初始化为适当的值
-            //double actual;
-            //actual = MotionEndPointCalc.CalcEndPoint(x1, y1, x2, y2);
-            //bool isSuccess = Math.Abs(expected - actual) < 1 ? true : false;
-            //Assert.IsTrue(isSuccess);
-            //Assert.Inconclusive("验证此测试方法的正确性。");
+            MotionEndPointCalc mepc = new MotionEndPointCalc();
+            double x1 = 5; // TODO: 初始化为适当的值
+            double y1 = 0; // TODO: 初始化为适当的值
+            double x2 = 5; // TODO: 初始化为适当的值
+            double y2 = 1.25; // TODO: 初始化为适当的值
+            MotionResult actual;
+            actual = mepc.CalcEndPoint(x1, y1, x2, y2);
+            Assert.AreEqual(actual.EndPointX, 5);
         }
 
         [TestMethod]

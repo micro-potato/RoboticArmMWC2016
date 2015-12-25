@@ -10,9 +10,7 @@ namespace MotionDetection
 {
     public class MotionPointsManger
     {
-        private List<Point> _centerXPoints;
-        private List<Point> _centerYPoints;
-        private List<Point> _centerX2Points;
+        private List<Point> _centerPoints=new List<Point>();
         private MotionEndPointCalc _motionEndPointCalc;
         private object _object = new object();
 
@@ -21,38 +19,25 @@ namespace MotionDetection
             _motionEndPointCalc = new MotionEndPointCalc();
         }
 
-        public void AddPoint(MotionPointEnum pointType,Point value)
+        public MotionResult UpdateResult()
         {
             Monitor.Enter(_object);
-            switch (pointType)
+            MotionResult result;
+            if (_centerPoints.Count >= 2)//从最近两个点计算
             {
-                case MotionPointEnum.Xpoint:
-                    _centerXPoints.Add(value);
-                    break;
-                case MotionPointEnum.Ypont:
-                    _centerYPoints.Add(value);
-                    break;
-                case MotionPointEnum.X2point:
-                    _centerX2Points.Add(value);
-                    break;
-                default:
-                    throw new ArgumentException();
+                double actualX1 = ActualX(_centerPoints[_centerPoints.Count - 2]);
+                double actualY1 = ActualY(_centerPoints[_centerPoints.Count - 2], _centerPoints[_centerPoints.Count - 2]);
+                double actualX2 = ActualX(_centerPoints[_centerPoints.Count - 1]);
+                double actualY2 = ActualY(_centerPoints[_centerPoints.Count - 2], _centerPoints[_centerPoints.Count - 2]);
+                result = _motionEndPointCalc.CalcEndPoint(actualX1, actualY1, actualX2, actualY2);
+                Monitor.Exit(_object);
+                return result;
             }
-            Monitor.Exit(_object);
-        }
-
-        public void UpdateResult()
-        {
-            Monitor.Enter(_object);
-            if (_centerXPoints.Count >= 2 && _centerYPoints.Count >= 2 && _centerX2Points.Count >= 2)//从最近两个点计算
+            else
             {
-                double actualX1 = ActualX(_centerYPoints[_centerYPoints.Count - 2]);
-                double actualY1 = ActualY(_centerXPoints[_centerXPoints.Count - 2], _centerX2Points[_centerX2Points.Count - 2]);
-                double actualX2 = ActualX(_centerYPoints[_centerYPoints.Count - 1]);
-                double actualY2 = ActualY(_centerXPoints[_centerXPoints.Count - 2], _centerX2Points[_centerX2Points.Count - 2]);
-                _motionEndPointCalc.CalcEndPoint(actualX1, actualY1, actualX2, actualY2);
+                Monitor.Exit(_object);
+                return null;
             }
-            Monitor.Exit(_object);
         }
 
         /// <summary>
