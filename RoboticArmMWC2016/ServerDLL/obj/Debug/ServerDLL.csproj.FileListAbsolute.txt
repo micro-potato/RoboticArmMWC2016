@@ -2,3 +2,4 @@ E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\ServerDLL\bin\De
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\ServerDLL\bin\Debug\ServerDLL.pdb
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\ServerDLL\obj\Debug\ServerDLL.dll
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\ServerDLL\obj\Debug\ServerDLL.pdb
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\ServerDLL\obj\Debug\ServerDLL.csprojResolveAssemblyReference.cache

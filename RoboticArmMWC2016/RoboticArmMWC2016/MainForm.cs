@@ -6,9 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using VideoSource;
-using dshow;
-using dshow.Core;
 using MotionDetection;
 using System.Threading;
 using Helpers;
@@ -20,14 +17,9 @@ namespace RoboticArmMWC2016
 {
     public partial class MainForm : Form,ILog
     {
-        private Camera _camera;
-        private int _cameraFpf;
         ConfigHelper _config;
-        private List<string> _cameraList;
-        private MotionColorInfo _motionColorInfo;
         private MotionPointsManger _motionPointManager;
         private RoboticArm.RobotHandler _robotHandler;
-        private ColorSelecter _colorSelector;
         private AsyncServer asyncServer = new AsyncServer();
         private List<int> m_ClientIndexs = new List<int>();
 
@@ -38,28 +30,26 @@ namespace RoboticArmMWC2016
             InitializeComponent();
         }
 
-        #region 监视画面
-        private void buttonX_Click(object sender, EventArgs e)
-        {
-            MonitorForm frm = new MonitorForm(_camera, _motionColorInfo);
-            frm.Show();
-        }
-        #endregion
-
         private void MainForm_Load(object sender, EventArgs e)
         {
             InitConfig();
-            _motionColorInfo = new MotionColorInfo() { RValue = _config.RValue, GValue = _config.GValue, BValue = _config.BValue, ColorThreshold = _config.ColorThreshold };
-            _colorSelector = new ColorSelecter(_motionColorInfo);
-            _motionPointManager = new MotionPointsManger();
+            _motionPointManager = new MotionPointsManger(_config.DetectFrequence) { DetectWidth = _config.DetectWidth, DetectHeight = _config.DetectHeight };
+            _motionPointManager.ValidResultGot += OnValidResultGot;
             InitRoboticArm();
-            InitCamerDeviceList();
-            InitCamera(_config.CameraID,ref _camera);
             LogHelper.GetInstance().RegLog(this);
             InitServer();
+           // _motionPointManager.StartDetect();
             //模拟数据
-            _simTimer = new System.Timers.Timer(1000/_config.CameraFps);
+            _simTimer = new System.Timers.Timer(_config.DetectFrequence);
             _simTimer.Elapsed += _simTimer_Elapsed;
+        }
+
+        void OnValidResultGot(MotionResult result)
+        {
+            var endpointX = result.EndPointX;
+            var reachTime = result.ReachTime;
+            _robotHandler.MoveArm(endpointX, reachTime);
+            LogHelper.GetInstance().ShowMsg(string.Format("到达位置：{0}，到达时间：{1}ms\n",endpointX,reachTime));
         }
 
         #region Socket
@@ -135,47 +125,6 @@ namespace RoboticArmMWC2016
             _robotHandler.MaxVelocity = _config.ReflectVelocity;
         }
 
-        private void InitCamerDeviceList()
-        {
-            FilterCollection filters = new FilterCollection(FilterCategory.VideoInputDevice);
-            if (filters.Count == 0)
-                throw new ApplicationException();
-
-            _cameraList=new List<string>();
-            for (int i = 0; i < filters.Count; i++)
-            {
-                _cameraList.Add(filters[i].MonikerString);
-            }
-        }
-
-        private void InitCamera(string cameraIndex,ref Camera cameratoInit)
-        {
-            // create video source
-            if (cameraIndex == "-1")//没有摄像头
-            {
-                return;
-            }
-            CaptureDevice videoSource = new CaptureDevice();
-            videoSource.VideoSource = _cameraList[int.Parse(cameraIndex)];
-            cameratoInit = new Camera(videoSource);
-            _cameraFpf = _config.CameraFps;
-            cameratoInit.Start();
-            cameratoInit.NewFrame += Camera_NewFrame;
-        }
-
-        void Camera_NewFrame(object sender, EventArgs e)
-        {
-            _camera.Lock();
-            var cameraImage =(Bitmap) _camera.LastFrame.Clone();
-            var iceballPoints = _colorSelector.DetectColorPoints(cameraImage);
-            var result = _motionPointManager.UpdateResult();
-            if (result != null)
-            {
-                _robotHandler.MoveArm(result.EndPointX, result.MoveVelocityY, result.DistancetoY);
-            }
-            _camera.Unlock();
-        }
-
         private void InitConfig()
         {
             _config = ConfigHelper.GetInstance();
@@ -206,10 +155,11 @@ namespace RoboticArmMWC2016
         private void SimOnce()
         {
             _simTimer.Stop();
-            var xEnd = new Random().Next(92);
+            var xEnd = new Random().Next(80);
             var distance = new Random().Next(100);
             double velocity = ((double)(new Random().Next(20)) / 20) * 100 / 100;
-            _robotHandler.MoveArm(xEnd, 0.8, distance);
+            //_robotHandler.MoveArm(xEnd, 0.8, distance);
+            _robotHandler.MoveArm(xEnd, 1);
             var waitforNext = new Random().Next(1000);
             _simTimer.Interval = waitforNext;
             _simTimer.Start();
@@ -237,6 +187,31 @@ namespace RoboticArmMWC2016
             this.InfoText.ScrollToCaret();
         }
 
-        
+        #region 检测开关
+        private void button1_Click(object sender, EventArgs e)
+        {
+            _motionPointManager.StartDetect();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            _motionPointManager.StopDetect();
+        }
+        #endregion
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.InfoText.Clear();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            _motionPointManager.StartCalibrate();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            _motionPointManager.EndCalibrate();
+        }
     }
 }

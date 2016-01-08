@@ -5,11 +5,9 @@ E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC201
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\obj\x86\Debug\RoboticArmMWC2016.csproj.GenerateResource.Cache
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\obj\x86\Debug\RoboticArmMWC2016.exe
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\obj\x86\Debug\RoboticArmMWC2016.pdb
-E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\bin\Debug\dshow.dll
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\bin\Debug\MotionDetection.dll
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\bin\Debug\MotionDetection.pdb
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\obj\x86\Debug\RoboticArmMWC2016.csprojResolveAssemblyReference.cache
-E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\obj\x86\Debug\RoboticArmMWC2016.MonitorForm.resources
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\obj\x86\Debug\RoboticArmMWC2016.CalcTestForm.resources
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\bin\Debug\Helpers.dll
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\bin\Debug\Helpers.pdb
@@ -19,3 +17,5 @@ E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC201
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\bin\Debug\ClientDLL.pdb
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\bin\Debug\ServerDLL.dll
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\bin\Debug\ServerDLL.pdb
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\bin\Debug\libTUIO.dll
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\bin\Debug\libTUIO.pdb

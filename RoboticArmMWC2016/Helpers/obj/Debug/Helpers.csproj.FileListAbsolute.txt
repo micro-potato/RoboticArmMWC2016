@@ -10,3 +10,4 @@ E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\Helpers\bin\Debu
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\Helpers\bin\Debug\Helpers.pdb
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\Helpers\obj\Debug\Helpers.dll
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\Helpers\obj\Debug\Helpers.pdb
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\Helpers\obj\Debug\Helpers.csprojResolveAssemblyReference.cache

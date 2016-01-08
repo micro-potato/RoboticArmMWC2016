@@ -94,9 +94,6 @@ namespace TestProject1
         public void TestConfig()
         {
             ConfigHelper.GetInstance().ResolveConfig(@"E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\RoboticArmMWC2016\bin\Debug\config.xml");
-            Assert.AreEqual(255, ConfigHelper.GetInstance().RValue);
-            Assert.AreEqual(255, ConfigHelper.GetInstance().BValue);
-            Assert.AreEqual(5, ConfigHelper.GetInstance().ColorThreshold);
         }
     }
 }

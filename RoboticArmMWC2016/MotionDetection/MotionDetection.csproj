@@ -32,18 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AForge">
-      <HintPath>..\..\dll\AForge.dll</HintPath>
-    </Reference>
-    <Reference Include="AForge.Imaging">
-      <HintPath>..\..\dll\AForge.Imaging.dll</HintPath>
-    </Reference>
-    <Reference Include="AForge.Math">
-      <HintPath>..\..\dll\AForge.Math.dll</HintPath>
-    </Reference>
-    <Reference Include="dshow">
-      <HintPath>..\..\dll\dshow.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -54,27 +42,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Camera.cs" />
-    <Compile Include="ColorSelecter.cs" />
     <Compile Include="MotionPointsManger.cs" />
     <Compile Include="MotionEndPointCalc.cs" />
-    <Compile Include="Moudle\CameraPositionInfo.cs" />
-    <Compile Include="Moudle\MotionColorInfo.cs" />
-    <Compile Include="Moudle\MotionPointEnum.cs" />
     <Compile Include="Moudle\MotionResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VideoSource\ByteArrayUtils.cs" />
-    <Compile Include="VideoSource\CameraEvents.cs" />
-    <Compile Include="VideoSource\CaptureDevice.cs" />
-    <Compile Include="VideoSource\IVideoSource.cs" />
-    <Compile Include="VideoSource\JPEGStream.cs" />
-    <Compile Include="VideoSource\MJPEGStream.cs" />
-    <Compile Include="VideoSource\VideoStream.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Helpers\Helpers.csproj">
       <Project>{5777e1dc-3a49-4628-bef1-9bb66c51b047}</Project>
       <Name>Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TUIO\TUIO_LIB.csproj">
+      <Project>{3cbf7d4a-ce06-490d-80da-580d02c268de}</Project>
+      <Name>TUIO_LIB</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

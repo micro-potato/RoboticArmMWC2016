@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Data>
-  <RValue>221</RValue>
-  <GValue>0</GValue>
-  <BValue>54</BValue>
-  <ColorThreshold>50</ColorThreshold>
   <RobotIP>172.31.1.147</RobotIP>
-  <RobotPort>30001</RobotPort>
-  <ServerPort>3000</ServerPort>
+  <RobotPort>30008</RobotPort>
+  <ServerPort>6065</ServerPort>
   <ReflectVelocity>0.9</ReflectVelocity><!--机械臂能够反应的最大速度（cm/ms）-->
-  <CameraID>1</CameraID>
-  <CameraFps>128</CameraFps>
+  <DetectWidth>90</DetectWidth><!--cm-->
+  <DetectHeight>70</DetectHeight> <!--cm-->
+  <DetectFrequence>20</DetectFrequence>
 </Data>

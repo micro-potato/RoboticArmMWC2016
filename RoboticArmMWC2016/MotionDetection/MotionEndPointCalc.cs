@@ -15,15 +15,13 @@ namespace MotionDetection
         public delegate void MotionResultHandler(MotionResult motionResult);
         private int _tableWidth;
         private int _tableHeight;
-        private int _detectFrequency;
 
         public MotionEndPointCalc()
         {
             ConfigHelper config = ConfigHelper.GetInstance();
             //桌子尺寸：厘米
-            _tableWidth = 198;
-            _tableHeight = 92;
-            _detectFrequency = config.CameraFps;
+            _tableWidth = 106;
+            _tableHeight = 198;
         }
 
         /// <summary>
@@ -33,8 +31,9 @@ namespace MotionDetection
         /// <param name="y1">小球公位置1Y</param>
         /// <param name="x2">小球公位置2X</param>
         /// <param name="y2">小球公位置2Y</param>
+        /// <param name="eplaseTime">移动间隔时间</param>
         /// <returns></returns>
-        public MotionResult CalcEndPoint(double x1,double y1,double x2,double y2)
+        public MotionResult CalcEndPoint(double x1,double y1,double x2,double y2,int eplaseTime)
         {
             MotionResult mResult = new MotionResult() { };
             var dx = x2 - x1;//x方向移动
@@ -44,17 +43,17 @@ namespace MotionDetection
             {
                 return null;
             }
-            var yVel = dy / _detectFrequency;
-            var distancetoY = _tableHeight - y2;
-            mResult = new MotionResult() { MoveVelocityY = yVel, DistancetoY = distancetoY };
+            var yVel = dy / eplaseTime;
+            var distancetoY = _tableHeight - y2;//距桌边垂直距离
+            int reachTime = (int)(distancetoY / yVel);
+            mResult = new MotionResult() { ReachTime=reachTime };
             if (dx == 0)//小球向机械臂垂直移动
             {
                 mResult.EndPointX = x1;
                 return mResult;
             }
             var motionAngle = MotionAngle(dx, dy);//距水平方向移动角度
-            var ytoTableEdge = _tableHeight - y2;//距桌边垂直距离
-            var xMoved = ytoTableEdge / Math.Tan(motionAngle);//x方向移动距离
+            var xMoved = distancetoY / Math.Tan(motionAngle);//x方向移动距离
             var endPointIngoreBoundry = xMoved + x2;//末端位置，忽略桌宽
             while (endPointIngoreBoundry > _tableWidth || endPointIngoreBoundry < 0)//边界外，有反弹
             {

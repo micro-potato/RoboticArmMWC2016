@@ -13,3 +13,5 @@ E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\TestProject1\obj
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\TestProject1\obj\Debug\TestProject1.pdb
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\TestProject1\bin\Debug\Helpers.dll
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\TestProject1\bin\Debug\Helpers.pdb
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\TestProject1\bin\Debug\libTUIO.dll
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\TestProject1\bin\Debug\libTUIO.pdb
