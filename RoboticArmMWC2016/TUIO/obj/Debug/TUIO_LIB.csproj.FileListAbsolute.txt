@@ -2,4 +2,3 @@ E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\TUIO\bin\Debug\l
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\TUIO\bin\Debug\libTUIO.pdb
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\TUIO\obj\Debug\libTUIO.dll
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\TUIO\obj\Debug\libTUIO.pdb
-E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\TUIO\obj\Debug\TUIO_LIB.csprojResolveAssemblyReference.cache

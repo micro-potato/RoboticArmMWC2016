@@ -6,5 +6,6 @@
   <ReflectVelocity>0.9</ReflectVelocity><!--机械臂能够反应的最大速度（cm/ms）-->
   <DetectWidth>90</DetectWidth><!--cm-->
   <DetectHeight>70</DetectHeight> <!--cm-->
-  <DetectFrequence>20</DetectFrequence>
+  <CalcedHeigth>150</CalcedHeigth><!--参与计算的距离(cm)-->
+  <DetectFrequence>10</DetectFrequence>
 </Data>

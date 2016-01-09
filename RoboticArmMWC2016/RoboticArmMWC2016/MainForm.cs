@@ -49,7 +49,7 @@ namespace RoboticArmMWC2016
             var endpointX = result.EndPointX;
             var reachTime = result.ReachTime;
             _robotHandler.MoveArm(endpointX, reachTime);
-            LogHelper.GetInstance().ShowMsg(string.Format("到达位置：{0}，到达时间：{1}ms\n",endpointX,reachTime));
+            //LogHelper.GetInstance().ShowMsg(string.Format("到达位置：{0}，到达时间：{1}ms\n",endpointX,reachTime));
         }
 
         #region Socket

@@ -13,15 +13,15 @@ namespace MotionDetection
     public class MotionEndPointCalc
     {
         public delegate void MotionResultHandler(MotionResult motionResult);
-        private int _tableWidth;
-        private int _tableHeight;
+        private int _calcedWidth;
+        private int _calcedHeight;
 
         public MotionEndPointCalc()
         {
             ConfigHelper config = ConfigHelper.GetInstance();
             //桌子尺寸：厘米
-            _tableWidth = 106;
-            _tableHeight = 198;
+            _calcedWidth = config.DetectWidth;
+            _calcedHeight = config.CalcedHeigth;
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace MotionDetection
                 return null;
             }
             var yVel = dy / eplaseTime;
-            var distancetoY = _tableHeight - y2;//距桌边垂直距离
+            var distancetoY = _calcedHeight - y2;//距桌边垂直距离
             int reachTime = (int)(distancetoY / yVel);
             mResult = new MotionResult() { ReachTime=reachTime };
             if (dx == 0)//小球向机械臂垂直移动
@@ -55,11 +55,11 @@ namespace MotionDetection
             var motionAngle = MotionAngle(dx, dy);//距水平方向移动角度
             var xMoved = distancetoY / Math.Tan(motionAngle);//x方向移动距离
             var endPointIngoreBoundry = xMoved + x2;//末端位置，忽略桌宽
-            while (endPointIngoreBoundry > _tableWidth || endPointIngoreBoundry < 0)//边界外，有反弹
+            while (endPointIngoreBoundry > _calcedWidth || endPointIngoreBoundry < 0)//边界外，有反弹
             {
-                if (endPointIngoreBoundry > _tableWidth)
+                if (endPointIngoreBoundry > _calcedWidth)
                 {
-                    endPointIngoreBoundry = _tableWidth - (endPointIngoreBoundry - _tableWidth);
+                    endPointIngoreBoundry = _calcedWidth - (endPointIngoreBoundry - _calcedWidth);
                 }
                 else if (endPointIngoreBoundry < 0)
                 {

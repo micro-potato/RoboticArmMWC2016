@@ -15,6 +15,7 @@ namespace Helpers
         public int DetectWidth { get; set; }
         public int DetectHeight { get; set; }
         public int DetectFrequence { get; set; }
+        public int CalcedHeigth { get; set; }
 
         private static ConfigHelper _configHelper;
         private ConfigHelper()
@@ -42,6 +43,7 @@ namespace Helpers
             this.DetectWidth = Convert.ToInt32(xmlDocument.SelectSingleNode("Data/DetectWidth").InnerText);
             this.DetectHeight = Convert.ToInt32(xmlDocument.SelectSingleNode("Data/DetectHeight").InnerText);
             this.DetectFrequence = Convert.ToInt32(xmlDocument.SelectSingleNode("Data/DetectFrequence").InnerText);
+            this.CalcedHeigth = Convert.ToInt32(xmlDocument.SelectSingleNode("Data/CalcedHeigth").InnerText);
         }   
     }
 }

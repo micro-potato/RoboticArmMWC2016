@@ -124,7 +124,7 @@ namespace RoboticArm
 
         public void MoveArm(double endPointX, int reachTime)
         {
-            var dataString = string.Format("{0}|{1}\r\n", endPointX.ToString(), 200);
+            var dataString = string.Format("{0}|{1}\r\n", endPointX.ToString(), 10);
             asyncClient.Send(dataString);
             //LogHelper.GetInstance().ShowMsg("发送到机械臂:=============" + dataString + "\n");
         }
