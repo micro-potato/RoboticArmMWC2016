@@ -12,6 +12,7 @@ using Helpers;
 using MotionDetection.Moudle;
 using ServerDLL;
 using System.Diagnostics;
+using RoboticArm.Sender;
 
 namespace RoboticArmMWC2016
 {
@@ -121,7 +122,11 @@ namespace RoboticArmMWC2016
 
         private void InitRoboticArm()
         {
-            _robotHandler = new RoboticArm.RobotHandler(_config.RobotIP, _config.RobotPort);
+            string robotInterType = _config.RobotInterType;
+            SenderTypes interType = (SenderTypes)Enum.Parse(typeof(SenderTypes), robotInterType);
+            //_robotHandler = new RoboticArm.RobotHandler(_config.RobotIP, _config.RobotPort);
+
+            _robotHandler = new RoboticArm.RobotHandler(_config.RobotIP, _config.RobotPort,interType);
             _robotHandler.MaxVelocity = _config.ReflectVelocity;
         }
 
@@ -155,12 +160,12 @@ namespace RoboticArmMWC2016
         private void SimOnce()
         {
             _simTimer.Stop();
-            var xEnd = new Random().Next(80);
+            var xEnd = new Random().Next(85);
             var distance = new Random().Next(100);
             double velocity = ((double)(new Random().Next(20)) / 20) * 100 / 100;
             //_robotHandler.MoveArm(xEnd, 0.8, distance);
             _robotHandler.MoveArm(xEnd, 1);
-            var waitforNext = new Random().Next(1000);
+            var waitforNext = new Random().Next(1,1000);
             _simTimer.Interval = waitforNext;
             _simTimer.Start();
         }

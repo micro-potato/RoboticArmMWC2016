@@ -66,8 +66,13 @@ namespace MotionDetection
                     endPointIngoreBoundry = endPointIngoreBoundry * -1;
                 }
             }
-            mResult.EndPointX = endPointIngoreBoundry;
+            mResult.EndPointX = RoboticValue(endPointIngoreBoundry); ;
             return mResult;
+        }
+
+        private double RoboticValue(double endPointIngoreBoundry)
+        {
+            return endPointIngoreBoundry - _calcedWidth / 2;
         }
 
         private double MotionAngle(double dx, double dy)

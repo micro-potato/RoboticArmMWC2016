@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerDLL", "ServerDLL\Serv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TUIO_LIB", "TUIO\TUIO_LIB.csproj", "{3CBF7D4A-CE06-490D-80DA-580D02C268DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDPDLL", "UDPDLL\UDPDLL.csproj", "{DA19A733-C3F7-444B-B5AC-9176634FE9B0}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = RoboticArmMWC2016.vsmdi
@@ -117,6 +119,16 @@ Global
 		{3CBF7D4A-CE06-490D-80DA-580D02C268DE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{3CBF7D4A-CE06-490D-80DA-580D02C268DE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{3CBF7D4A-CE06-490D-80DA-580D02C268DE}.Release|x86.ActiveCfg = Release|Any CPU
+		{DA19A733-C3F7-444B-B5AC-9176634FE9B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA19A733-C3F7-444B-B5AC-9176634FE9B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA19A733-C3F7-444B-B5AC-9176634FE9B0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{DA19A733-C3F7-444B-B5AC-9176634FE9B0}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{DA19A733-C3F7-444B-B5AC-9176634FE9B0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DA19A733-C3F7-444B-B5AC-9176634FE9B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA19A733-C3F7-444B-B5AC-9176634FE9B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA19A733-C3F7-444B-B5AC-9176634FE9B0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{DA19A733-C3F7-444B-B5AC-9176634FE9B0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{DA19A733-C3F7-444B-B5AC-9176634FE9B0}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

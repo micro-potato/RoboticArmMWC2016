@@ -7,3 +7,5 @@ E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\ArmController\bi
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\ArmController\bin\Debug\ClientDLL.pdb
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\ArmController\obj\Debug\RoboticArm.dll
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\ArmController\obj\Debug\RoboticArm.pdb
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\ArmController\bin\Debug\UDPDLL.dll
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\ArmController\bin\Debug\UDPDLL.pdb

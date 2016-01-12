@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Data>
-  <RobotIP>172.31.1.147</RobotIP>
-  <RobotPort>30008</RobotPort>
+  <RobotIP>127.0.0.1</RobotIP>
+  <RobotPort>30001</RobotPort>
   <ServerPort>6065</ServerPort>
   <ReflectVelocity>0.9</ReflectVelocity><!--机械臂能够反应的最大速度（cm/ms）-->
-  <DetectWidth>90</DetectWidth><!--cm-->
-  <DetectHeight>70</DetectHeight> <!--cm-->
-  <CalcedHeigth>150</CalcedHeigth><!--参与计算的距离(cm)-->
+  <DetectWidth>96</DetectWidth><!--cm-->
+  <DetectHeight>84</DetectHeight> <!--cm-->
+  <CalcedHeigth>160</CalcedHeigth><!--参与计算的距离(cm)-->
   <DetectFrequence>10</DetectFrequence>
+  <RobotInterType>UDP</RobotInterType><!--TCP,UDP-->
+  <OffsetValueX>0</OffsetValueX>
 </Data>

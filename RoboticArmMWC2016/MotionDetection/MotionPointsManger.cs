@@ -14,7 +14,7 @@ namespace MotionDetection
     public class MotionPointsManger : TuioListener
     {
         private MotionEndPointCalc _motionEndPointCalc;
-        private object _iceball = new object();
+        private object _iceballObject = new object();
 
         private Dictionary<long, TuioCursor> _cursorList;
         private Dictionary<long, TuioBlob> blobList;
@@ -66,7 +66,7 @@ namespace MotionDetection
             {
                 return;
             }
-            lock (_iceball)
+            lock (_iceballObject)
             {
                 var lastPoint = _cursorList.Values.ToList()[_cursorList.Count - 1];//最新加入的点
                 var xLocation = lastPoint.X;
@@ -78,6 +78,7 @@ namespace MotionDetection
                 {
                     ValidResultGot(result);
                     LogHelper.GetInstance().ShowMsg(string.Format("当前计算出的位置：{0},{1}cm\n", tableX.ToString("f1"),tableY.ToString("f1")));
+                    Thread.Sleep(1000);
                 }
             }
         }
@@ -104,6 +105,7 @@ namespace MotionDetection
                 while (_isDetecting)
                 {
                     DetectOnce();
+                    Thread.Sleep(10);
                 }
             });
         }
@@ -112,7 +114,7 @@ namespace MotionDetection
        {
            try
            {
-               lock (_iceball)
+               lock (_iceballObject)
                {
                    if (_cursorList.Count == 0)//未检测到非背景点
                    {
@@ -121,10 +123,9 @@ namespace MotionDetection
                        return;
                    }
                    _sw.Start();
-                   TuioCursor[] detectedPoints = new TuioCursor[_cursorList.Count];
-                   _cursorList.Values.ToList<TuioCursor>().CopyTo(detectedPoints);
-                   TuioCursor iceball = SearchMovingIceball(detectedPoints);
-                   if (iceball == null)//没有找到冰球
+
+                   TuioCursor iceball = SearchMovingIceball();
+                   if (iceball == null || iceball.Path.Count == 0)//没有找到冰球
                    {
                        //LogHelper.GetInstance().ShowMsg(string.Format("没有检测到冰球，用时{0}\n", _sw.ElapsedMilliseconds));
                        return;
@@ -144,15 +145,15 @@ namespace MotionDetection
                    {
                        if (ValidResultGot != null)
                        {
-                           //LogHelper.GetInstance().ShowMsg(string.Format("已检测到第一个运动点{0}，用时{1}\n", result.EndPointX, _sw.ElapsedMilliseconds));
-                           LogHelper.GetInstance().ShowMsg(_sw.ElapsedMilliseconds.ToString()+"\n");
+                           LogHelper.GetInstance().ShowMsg(string.Format("已检测到第一个运动点{0}\n", result.EndPointX));
+                          // LogHelper.GetInstance().ShowMsg(_sw.ElapsedMilliseconds.ToString() + "\n");
                            _lastResult = result;
                            ValidResultGot(result);
                        }
                    }
                    else
                    {
-                       if (Math.Abs(result.EndPointX - _lastResult.EndPointX) <= 10 /*&& Math.Abs(result.ReachTime - _lastResult.ReachTime) <= 500*/)//忽略相邻近似结果
+                       if (Math.Abs(result.EndPointX - _lastResult.EndPointX) <= 15 /*&& Math.Abs(result.ReachTime - _lastResult.ReachTime) <= 500*/)//忽略相邻近似结果
                        {
                            _ignoreTimes++;
                            //LogHelper.GetInstance().ShowMsg("忽略结果，已忽略：" + _ignoreTimes.ToString() + "\n");
@@ -162,10 +163,10 @@ namespace MotionDetection
                            if (ValidResultGot != null)
                            {
                                _lastResult = result;
-                               ValidResultGot(result);
+                               //ValidResultGot(result);
                                _ignoreTimes = 0;
                                //LogHelper.GetInstance().ShowMsg(string.Format("初始位置：{0},{1}，移动到：{2},{3},用时：{4}==========", x1, y1, x2, y2,_sw.ElapsedMilliseconds));
-                               LogHelper.GetInstance().ShowMsg(string.Format("移动到 {0} 用时{1}\n", result.EndPointX, _sw.ElapsedMilliseconds));
+                               //LogHelper.GetInstance().ShowMsg(string.Format("移动到 {0} 用时{1}\n", result.EndPointX, _sw.ElapsedMilliseconds));
                            }
                        }
                    }
@@ -173,45 +174,83 @@ namespace MotionDetection
            }
            catch (Exception e)
            {
-               LogHelper.GetInstance().ShowMsg(string.Format("捕捉冰球运动错误："+e.Message));
+               LogHelper.GetInstance().ShowMsg(string.Format("捕捉冰球运动错误：" + e.Message));
            }
        }
 
-        /// <summary>
-        /// 寻找移动的冰球
-        /// </summary>
-        private TuioCursor SearchMovingIceball(TuioCursor[] cursors)
-        {
-            try
-            {
-                List<TuioCursor> validDirPoints = new List<TuioCursor>();
-                TuioCursor iceBall;
+       /// <summary>
+       /// 寻找移动的冰球
+       /// </summary>
+       private TuioCursor SearchMovingIceball()
+       {
+           try
+           {
+               List<TuioCursor> validDirPoints = new List<TuioCursor>();
+               TuioCursor iceBall;
+               var cursors = _cursorList.Values.ToList();
+               for (int i = 0; i < cursors.Count; i++)//筛选出向机械臂移动的点
+               {
+                   var point = cursors[i];
+                   var pathCount = point.Path.Count;
+                   var currentY = point.Y;
+                   var dy = point.Path[pathCount - 1].Y - point.Path[0].Y;
+                   if (point.YSpeed < 1 && dy < -0.03 && currentY < 0.6)//速度&移动距离&当前位置
+                   {
+                       validDirPoints.Add(point);
+                   }
+               }
+               if (validDirPoints.Count != 0)//有向机械臂移动的点
+               {
+                   var sortedPoints = (validDirPoints.OrderByDescending(p => p.Y)).ToList();//按水平方向距机械距离排序
+                   iceBall = sortedPoints[0];
+               }
+               else
+                   iceBall = null;
+               return iceBall;
+           }
+           catch (Exception ex)
+           {
+               LogHelper.GetInstance().ShowMsg("获取冰球失败：" + ex.Message);
+               return null;
+           }
+       }
 
-                for (int i = 0; i < cursors.Length; i++)//筛选出向机械臂移动的点
-                {
-                    var point = cursors[i];
-                    var pathCount = point.Path.Count;
-                    var dy = point.Path[pathCount - 1].Y - point.Path[0].Y;
-                    if (point.YSpeed < 1 && dy < -0.05)
-                    {
-                        validDirPoints.Add(point);
-                    }
-                }
-                if (validDirPoints.Count != 0)//有向机械臂移动的点
-                {
-                    var sortedPoints = (validDirPoints.OrderByDescending(p => p.Y)).ToList();//按水平方向距机械距离排序
-                    iceBall = sortedPoints[0];
-                }
-                else
-                    iceBall = null;
-                return iceBall;
-            }
-            catch (Exception ex)
-            {
-                LogHelper.GetInstance().ShowMsg("获取冰球失败：" + ex.Message);
-                return null;
-            }
-        }
+        ///// <summary>
+        ///// 寻找移动的冰球
+        ///// </summary>
+        //private TuioCursor SearchMovingIceball(TuioCursor[] cursors)
+        //{
+        //    try
+        //    {
+        //        List<TuioCursor> validDirPoints = new List<TuioCursor>();
+        //        TuioCursor iceBall;
+
+        //        for (int i = 0; i < cursors.Length; i++)//筛选出向机械臂移动的点
+        //        {
+        //            var point = cursors[i];
+        //            var pathCount = point.Path.Count;
+        //            var currentY = point.Y;
+        //            var dy = point.Path[pathCount - 1].Y - point.Path[0].Y;
+        //            if (point.YSpeed < 1 && dy < -0.05&&currentY<0.75)//速度&移动距离&当前位置
+        //            {
+        //                validDirPoints.Add(point);
+        //            }
+        //        }
+        //        if (validDirPoints.Count != 0)//有向机械臂移动的点
+        //        {
+        //            var sortedPoints = (validDirPoints.OrderByDescending(p => p.Y)).ToList();//按水平方向距机械距离排序
+        //            iceBall = sortedPoints[0];
+        //        }
+        //        else
+        //            iceBall = null;
+        //        return iceBall;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        LogHelper.GetInstance().ShowMsg("获取冰球失败：" + ex.Message);
+        //        return null;
+        //    }
+        //}
 
         /// <summary>
         /// 根据摄像头位置计算实际Y坐标
@@ -231,7 +270,8 @@ namespace MotionDetection
         /// <returns></returns>
         private double ActualX(double screenX)
         {
-            return screenX * _detectWidth;
+            //return screenX * _detectWidth;
+            return screenX * _detectWidth - _detectWidth / 2;
         }
         #endregion
 
@@ -262,7 +302,7 @@ namespace MotionDetection
 
         public void addTuioCursor(TuioCursor tcur)
         {
-            lock (_iceball)
+            lock (_iceballObject)
             {
                 _cursorList.Add(tcur.SessionID, tcur);
             }
@@ -276,7 +316,7 @@ namespace MotionDetection
 
         public void removeTuioCursor(TuioCursor tcur)
         {
-            lock (_iceball)
+            lock (_iceballObject)
             {
                 _cursorList.Remove(tcur.SessionID);
             }

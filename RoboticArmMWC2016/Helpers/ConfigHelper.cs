@@ -16,6 +16,8 @@ namespace Helpers
         public int DetectHeight { get; set; }
         public int DetectFrequence { get; set; }
         public int CalcedHeigth { get; set; }
+        public int OffsetValueX { get; set; }
+        public string RobotInterType { get; set; }
 
         private static ConfigHelper _configHelper;
         private ConfigHelper()
@@ -44,6 +46,8 @@ namespace Helpers
             this.DetectHeight = Convert.ToInt32(xmlDocument.SelectSingleNode("Data/DetectHeight").InnerText);
             this.DetectFrequence = Convert.ToInt32(xmlDocument.SelectSingleNode("Data/DetectFrequence").InnerText);
             this.CalcedHeigth = Convert.ToInt32(xmlDocument.SelectSingleNode("Data/CalcedHeigth").InnerText);
-        }   
+            this.OffsetValueX = Convert.ToInt32(xmlDocument.SelectSingleNode("Data/OffsetValueX").InnerText);
+            this.RobotInterType = xmlDocument.SelectSingleNode("Data/RobotInterType").InnerText;
+        }       
     }
 }
