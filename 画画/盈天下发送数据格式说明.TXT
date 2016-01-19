@@ -1,0 +1,30 @@
+//socket协议
+IP地址192.168.39.200，端口号是8000
+
+//数据包格式
+INT  ByteNumS        //数据包的字节数（本身除外）
+INT  SketchNumS      //轮廓数，对应画笔在Pad上抬笔画的数量
+INT  AllPointsNums   //所有轮廓包含的点数
+INT  -1              //轮廓的标志
+INT  CurrentPtsNums  //当前轮廓中的点数
+INT  X
+INT  Y
+INT  X
+INT  Y
+INT  X
+INT  Y
+...
+INT  -1              //轮廓的标志
+INT  CurrentPtsNums  //当前轮廓中的点数
+INT  X
+INT  Y
+INT  X
+INT  Y
+INT  X
+INT  Y
+...
+...
+注意：
+数据发送完机器人控制器会有返回值
+1：当前数据包接收完毕
+11：等待下一轮数据接收，此时可发送下一组数据

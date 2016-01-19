@@ -12,17 +12,12 @@ namespace RoboticArm
     public class RobotHandler
     {
         private ISender _sender;
-
-        private AsyncClient asyncClient;
-        private System.Timers.Timer asyncTimer = new System.Timers.Timer();
-
-        private UDPDLL.AsyncUDP udpSender = new UDPDLL.AsyncUDP();
-
+        private ISender _patternSender;
         string _ip;
         int _port;
         public double MaxVelocity { get; set; }
 
-        public RobotHandler(string ip, int port, SenderTypes type)
+        public RobotHandler(string ip, int port, SenderTypes type,int patternPort)
         {
             _ip = ip;
             _port = port;
@@ -34,6 +29,7 @@ namespace RoboticArm
             {
                 _sender = new UDPSender(ip, port);
             }
+            _patternSender = new TcpSender(ip, patternPort);
         }
 
         #region Move
@@ -70,5 +66,10 @@ namespace RoboticArm
             _sender.SendtoRoboticArm(dataString);
         }
         #endregion
+
+        public void SetPattern(string patternName)
+        {
+            _patternSender.SendtoRoboticArm(patternName + "\r\n");
+        }
     }
 }

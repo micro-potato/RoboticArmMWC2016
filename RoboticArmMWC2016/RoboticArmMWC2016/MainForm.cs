@@ -34,7 +34,7 @@ namespace RoboticArmMWC2016
         private void MainForm_Load(object sender, EventArgs e)
         {
             InitConfig();
-            _motionPointManager = new MotionPointsManger(_config.DetectFrequence) { DetectWidth = _config.DetectWidth, DetectHeight = _config.DetectHeight };
+            _motionPointManager = new MotionPointsManger(_config.DetectFrequence) { DetectWidth = _config.DetectWidth, DetectHeight = _config.DetectHeight ,CalibrateX=_config.CalibrateX};
             _motionPointManager.ValidResultGot += OnValidResultGot;
             InitRoboticArm();
             LogHelper.GetInstance().RegLog(this);
@@ -45,6 +45,10 @@ namespace RoboticArmMWC2016
             _simTimer.Elapsed += _simTimer_Elapsed;
         }
 
+        /// <summary>
+        /// 获得最终到达位置的结果
+        /// </summary>
+        /// <param name="result"></param>
         void OnValidResultGot(MotionResult result)
         {
             var endpointX = result.EndPointX;
@@ -126,7 +130,7 @@ namespace RoboticArmMWC2016
             SenderTypes interType = (SenderTypes)Enum.Parse(typeof(SenderTypes), robotInterType);
             //_robotHandler = new RoboticArm.RobotHandler(_config.RobotIP, _config.RobotPort);
 
-            _robotHandler = new RoboticArm.RobotHandler(_config.RobotIP, _config.RobotPort,interType);
+            _robotHandler = new RoboticArm.RobotHandler(_config.RobotIP, _config.RobotPort,interType,_config.RobotPatternPort);
             _robotHandler.MaxVelocity = _config.ReflectVelocity;
         }
 
@@ -217,6 +221,24 @@ namespace RoboticArmMWC2016
         private void button8_Click(object sender, EventArgs e)
         {
             _motionPointManager.EndCalibrate();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            _robotHandler.SetPattern("playhockey");
+            _motionPointManager.StartDetect();
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            _robotHandler.SetPattern("drawing");
+            _motionPointManager.StopDetect();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            _robotHandler.SetPattern("dancing");
+            _motionPointManager.StopDetect();
         }
     }
 }

@@ -35,6 +35,9 @@ namespace MotionDetection
         /// <returns></returns>
         public MotionResult CalcEndPoint(double x1,double y1,double x2,double y2,int eplaseTime)
         {
+            double endPointTheory;//到达终点的位置（理论值）
+            double endPointActual;//到达终点的位置（实际值）
+            double middleValue = _calcedWidth / 2;
             MotionResult mResult = new MotionResult() { };
             var dx = x2 - x1;//x方向移动
             var dy = y2 - y1;//y方向移动
@@ -47,34 +50,45 @@ namespace MotionDetection
             var distancetoY = _calcedHeight - y2;//距桌边垂直距离
             int reachTime = (int)(distancetoY / yVel);
             mResult = new MotionResult() { ReachTime=reachTime };
-            if (dx == 0)//小球向机械臂垂直移动
+            if (Math.Abs(dx) == 0)//小球向机械臂垂直移动
             {
                 mResult.EndPointX = x1;
                 return mResult;
             }
             var motionAngle = MotionAngle(dx, dy);//距水平方向移动角度
             var xMoved = distancetoY / Math.Tan(motionAngle);//x方向移动距离
-            var endPointIngoreBoundry = xMoved + x2;//末端位置，忽略桌宽
-            while (endPointIngoreBoundry > _calcedWidth || endPointIngoreBoundry < 0)//边界外，有反弹
+            endPointTheory = xMoved + x2+middleValue;//末端位置，忽略桌宽
+            while (endPointTheory > _calcedWidth || endPointTheory < 0)//边界外，有反弹
             {
-                if (endPointIngoreBoundry > _calcedWidth)
+                if (endPointTheory > _calcedWidth)
                 {
-                    endPointIngoreBoundry = _calcedWidth - (endPointIngoreBoundry - _calcedWidth);
+                    endPointTheory = _calcedWidth - (endPointTheory - _calcedWidth);
                 }
-                else if (endPointIngoreBoundry < 0)
+                else if (endPointTheory < 0)
                 {
-                    endPointIngoreBoundry = endPointIngoreBoundry * -1;
+                    endPointTheory = endPointTheory * -1;
                 }
             }
-            mResult.EndPointX = RoboticValue(endPointIngoreBoundry); ;
+            endPointActual = endPointTheory - middleValue;
+            mResult.EndPointX = endPointActual;
             return mResult;
+            #region old
+            //var endPointIngoreBoundry = xMoved + x2;//末端位置，忽略桌宽
+            //while (endPointIngoreBoundry > _calcedWidth || endPointIngoreBoundry < 0)//边界外，有反弹
+            //{
+            //    if (endPointIngoreBoundry > _calcedWidth)
+            //    {
+            //        endPointIngoreBoundry = _calcedWidth - (endPointIngoreBoundry - _calcedWidth);
+            //    }
+            //    else if (endPointIngoreBoundry < 0)
+            //    {
+            //        endPointIngoreBoundry = endPointIngoreBoundry * -1;
+            //    }
+            //}
+            //mResult.EndPointX = RoboticValue(endPointIngoreBoundry); ;
+            //return mResult;
+            #endregion
         }
-
-        private double RoboticValue(double endPointIngoreBoundry)
-        {
-            return endPointIngoreBoundry - _calcedWidth / 2;
-        }
-
         private double MotionAngle(double dx, double dy)
         {
             double angle;

@@ -10,3 +10,4 @@ E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\SocketClientDLL\
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\SocketClientDLL\bin\Debug\ClientDLL.pdb
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\SocketClientDLL\obj\Debug\ClientDLL.dll
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\SocketClientDLL\obj\Debug\ClientDLL.pdb
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\SocketClientDLL\obj\Debug\ClientDLL.csprojResolveAssemblyReference.cache

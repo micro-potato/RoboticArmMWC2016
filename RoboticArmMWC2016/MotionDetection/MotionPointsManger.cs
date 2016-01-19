@@ -18,33 +18,34 @@ namespace MotionDetection
 
         private Dictionary<long, TuioCursor> _cursorList;
         private Dictionary<long, TuioBlob> blobList;
-        //private int _cameraFps;
 
         private int _detectFrequency;
         private int _detectWidth;
         private int _detectHeight;
+        private int _calibrateX;
 
         public int DetectWidth { set { _detectWidth = value; } }
         public int DetectHeight { set { _detectHeight = value; } }
-
+        public int CalibrateX { set { _calibrateX = value; } }
+        
+        
         private int _ignoreTimes = 0;
         private MotionResult _lastResult;
 
         public delegate void MotionResultHandler (MotionResult result);
         public event MotionResultHandler ValidResultGot;
 
-        //timer
         private System.Timers.Timer _calibrateTimer;
-        //private System.Timers.Timer _detectTimer;
 
-        //async
         bool _isDetecting = false;
+        bool _isContinuousResult = true;//是否为连续结果
+        List<double> _continuousResults = new List<double>();
         
         public MotionPointsManger(int detectFrefency)
         {
             _detectFrequency = detectFrefency;
             _motionEndPointCalc = new MotionEndPointCalc();
-            _calibrateTimer = new System.Timers.Timer(detectFrefency);
+            _calibrateTimer = new System.Timers.Timer(1000);
             _calibrateTimer.Elapsed += CalibrateTimer_Elapsed;
             InitTUIO();
         }
@@ -62,23 +63,22 @@ namespace MotionDetection
 
         void CalibrateTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            if (_cursorList.Count == 0)
-            {
-                return;
-            }
             lock (_iceballObject)
             {
+                if (_cursorList.Count == 0)
+                {
+                    return;
+                }
                 var lastPoint = _cursorList.Values.ToList()[_cursorList.Count - 1];//最新加入的点
                 var xLocation = lastPoint.X;
-                var yLocation=lastPoint.Y;
+                var yLocation = lastPoint.Y;
                 var tableX = ActualX(xLocation);
                 var tableY = ActualY(yLocation);
                 MotionResult result = new MotionResult() { EndPointX = tableX, ReachTime = 50 };
                 if (ValidResultGot != null)//机械臂移动到对应X位置
                 {
                     ValidResultGot(result);
-                    LogHelper.GetInstance().ShowMsg(string.Format("当前计算出的位置：{0},{1}cm\n", tableX.ToString("f1"),tableY.ToString("f1")));
-                    Thread.Sleep(1000);
+                    LogHelper.GetInstance().ShowMsg(string.Format("当前计算出的位置：{0},{1}cm\n", tableX.ToString("f1"), tableY.ToString("f1")));
                 }
             }
         }
@@ -116,10 +116,11 @@ namespace MotionDetection
            {
                lock (_iceballObject)
                {
-                   if (_cursorList.Count == 0)//未检测到非背景点
+                   if (_cursorList.Count == 0)//未检测到运动点
                    {
                        _lastResult = null;
                        _sw.Reset();
+                       //FlushResult();
                        return;
                    }
                    _sw.Start();
@@ -128,6 +129,7 @@ namespace MotionDetection
                    if (iceball == null || iceball.Path.Count == 0)//没有找到冰球
                    {
                        //LogHelper.GetInstance().ShowMsg(string.Format("没有检测到冰球，用时{0}\n", _sw.ElapsedMilliseconds));
+                       //FlushResult();
                        return;
                    }
                    var startPoint = iceball.Path[0];
@@ -149,11 +151,14 @@ namespace MotionDetection
                           // LogHelper.GetInstance().ShowMsg(_sw.ElapsedMilliseconds.ToString() + "\n");
                            _lastResult = result;
                            ValidResultGot(result);
+                           //_isContinuousResult = true;
+                           //AppendResult(result.EndPointX);
+                           return;
                        }
                    }
                    else
                    {
-                       if (Math.Abs(result.EndPointX - _lastResult.EndPointX) <= 15 /*&& Math.Abs(result.ReachTime - _lastResult.ReachTime) <= 500*/)//忽略相邻近似结果
+                       if (Math.Abs(result.EndPointX - _lastResult.EndPointX) <= 10 /*&& Math.Abs(result.ReachTime - _lastResult.ReachTime) <= 500*/)//忽略相邻近似结果
                        {
                            _ignoreTimes++;
                            //LogHelper.GetInstance().ShowMsg("忽略结果，已忽略：" + _ignoreTimes.ToString() + "\n");
@@ -165,6 +170,7 @@ namespace MotionDetection
                                _lastResult = result;
                                //ValidResultGot(result);
                                _ignoreTimes = 0;
+                               //AppendResult(result.EndPointX);
                                //LogHelper.GetInstance().ShowMsg(string.Format("初始位置：{0},{1}，移动到：{2},{3},用时：{4}==========", x1, y1, x2, y2,_sw.ElapsedMilliseconds));
                                //LogHelper.GetInstance().ShowMsg(string.Format("移动到 {0} 用时{1}\n", result.EndPointX, _sw.ElapsedMilliseconds));
                            }
@@ -176,6 +182,27 @@ namespace MotionDetection
            {
                LogHelper.GetInstance().ShowMsg(string.Format("捕捉冰球运动错误：" + e.Message));
            }
+       }
+
+       private void AppendResult(double endpointValue)
+       {
+           _continuousResults.Add(endpointValue);
+       }
+
+       private void FlushResult()
+       {
+           if (_continuousResults.Count == 0)
+           {
+               return;
+           }
+           MotionResult finalResult = new MotionResult() { ReachTime=50};
+           double endPointValue = _continuousResults.Average();
+           finalResult.EndPointX = endPointValue;
+           if (ValidResultGot!=null)
+           {
+               ValidResultGot(finalResult);
+           }
+           _continuousResults.Clear();
        }
 
        /// <summary>
@@ -194,7 +221,7 @@ namespace MotionDetection
                    var pathCount = point.Path.Count;
                    var currentY = point.Y;
                    var dy = point.Path[pathCount - 1].Y - point.Path[0].Y;
-                   if (point.YSpeed < 1 && dy < -0.03 && currentY < 0.6)//速度&移动距离&当前位置
+                   if (point.YSpeed < 1 && dy < -0.03 && currentY < 0.4)//速度&移动距离&当前位置
                    {
                        validDirPoints.Add(point);
                    }
@@ -215,49 +242,9 @@ namespace MotionDetection
            }
        }
 
-        ///// <summary>
-        ///// 寻找移动的冰球
-        ///// </summary>
-        //private TuioCursor SearchMovingIceball(TuioCursor[] cursors)
-        //{
-        //    try
-        //    {
-        //        List<TuioCursor> validDirPoints = new List<TuioCursor>();
-        //        TuioCursor iceBall;
-
-        //        for (int i = 0; i < cursors.Length; i++)//筛选出向机械臂移动的点
-        //        {
-        //            var point = cursors[i];
-        //            var pathCount = point.Path.Count;
-        //            var currentY = point.Y;
-        //            var dy = point.Path[pathCount - 1].Y - point.Path[0].Y;
-        //            if (point.YSpeed < 1 && dy < -0.05&&currentY<0.75)//速度&移动距离&当前位置
-        //            {
-        //                validDirPoints.Add(point);
-        //            }
-        //        }
-        //        if (validDirPoints.Count != 0)//有向机械臂移动的点
-        //        {
-        //            var sortedPoints = (validDirPoints.OrderByDescending(p => p.Y)).ToList();//按水平方向距机械距离排序
-        //            iceBall = sortedPoints[0];
-        //        }
-        //        else
-        //            iceBall = null;
-        //        return iceBall;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        LogHelper.GetInstance().ShowMsg("获取冰球失败：" + ex.Message);
-        //        return null;
-        //    }
-        //}
-
         /// <summary>
         /// 根据摄像头位置计算实际Y坐标
         /// </summary>
-        /// <param name="cameraX"></param>
-        /// <param name="cameraX2"></param>
-        /// <returns></returns>
         private double ActualY(double screenY)
         {
             return (1 - screenY) * _detectHeight;
@@ -266,12 +253,10 @@ namespace MotionDetection
         /// <summary>
         /// 根据摄像头位置计算实际X坐标
         /// </summary>
-        /// <param name="cameraY"></param>
-        /// <returns></returns>
         private double ActualX(double screenX)
         {
             //return screenX * _detectWidth;
-            return screenX * _detectWidth - _detectWidth / 2;
+            return screenX * _detectWidth - _detectWidth / 2+_calibrateX;
         }
         #endregion
 

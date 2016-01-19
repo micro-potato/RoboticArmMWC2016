@@ -38,6 +38,9 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button5
@@ -88,22 +91,24 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(801, 420);
+            this.button1.Location = new System.Drawing.Point(788, 264);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(99, 31);
             this.button1.TabIndex = 13;
             this.button1.Text = "开始检测";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(801, 458);
+            this.button3.Location = new System.Drawing.Point(788, 302);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(99, 32);
             this.button3.TabIndex = 14;
             this.button3.Text = "停止检测";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Visible = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
@@ -118,7 +123,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(805, 12);
+            this.button7.Location = new System.Drawing.Point(805, 423);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(95, 32);
             this.button7.TabIndex = 16;
@@ -128,7 +133,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(805, 50);
+            this.button8.Location = new System.Drawing.Point(805, 461);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(95, 32);
             this.button8.TabIndex = 17;
@@ -136,11 +141,44 @@
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(788, 46);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(112, 37);
+            this.button9.TabIndex = 18;
+            this.button9.Text = "冰球模式";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(788, 89);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(112, 37);
+            this.button10.TabIndex = 19;
+            this.button10.Text = "绘画模式";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(788, 133);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(112, 37);
+            this.button11.TabIndex = 20;
+            this.button11.Text = "跳舞模式";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(925, 499);
+            this.Controls.Add(this.button11);
+            this.Controls.Add(this.button10);
+            this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button4);
@@ -172,6 +210,9 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button11;
     }
 }
 

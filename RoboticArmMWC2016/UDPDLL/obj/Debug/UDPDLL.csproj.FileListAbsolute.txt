@@ -26,3 +26,4 @@ E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\UDPDLL\bin\Debug
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\UDPDLL\bin\Debug\UDPDLL.pdb
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\UDPDLL\obj\Debug\UDPDLL.dll
 E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\UDPDLL\obj\Debug\UDPDLL.pdb
+E:\code\code2016\RoboticArmMWC2016\sourceCode\RoboticArmMWC2016\UDPDLL\obj\Debug\UDPDLL.csprojResolveAssemblyReference.cache

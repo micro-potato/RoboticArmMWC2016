@@ -81,13 +81,13 @@ namespace TestProject1
         public void CalcEndPointTest()
         {
             MotionEndPointCalc mepc = new MotionEndPointCalc();
-            double x1 = 5; // TODO: 初始化为适当的值
+            double x1 = -48; // TODO: 初始化为适当的值
             double y1 = 0; // TODO: 初始化为适当的值
-            double x2 = 5; // TODO: 初始化为适当的值
-            double y2 = 1.25; // TODO: 初始化为适当的值
+            double x2 = -32; // TODO: 初始化为适当的值
+            double y2 = 37; // TODO: 初始化为适当的值
             MotionResult actual;
-            //actual = mepc.CalcEndPoint(x1, y1, x2, y2);
-            //Assert.AreEqual(actual.EndPointX, 5);
+            actual = mepc.CalcEndPoint(x1, y1, x2, y2,80);
+            Assert.AreEqual(actual.EndPointX, -32);
         }
 
         [TestMethod]

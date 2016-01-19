@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Data>
+    <ServerPort>8898</ServerPort>
+    <MachineIP>192.168.39.220</MachineIP>
+    <MachinePort>8000</MachinePort>
+    
+    <DrawAngle>30</DrawAngle>
+    <PaperWidth>194</PaperWidth>
+    <PaperHeight>165</PaperHeight>
+
+    <OffsetX>0</OffsetX>
+    <OffsetY>0</OffsetY>
+    <OffsetZ>0</OffsetZ>
+</Data>
