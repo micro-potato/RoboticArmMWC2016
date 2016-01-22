@@ -1,0 +1,7 @@
+pattern:playhockey//
+pattern:drawing
+pattern:dancing
+control:calibrate
+control:stopCalibrate
+forward:start
+forward:pause

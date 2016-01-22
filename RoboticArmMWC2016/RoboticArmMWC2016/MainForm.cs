@@ -23,6 +23,8 @@ namespace RoboticArmMWC2016
         private RoboticArm.RobotHandler _robotHandler;
         private AsyncServer asyncServer = new AsyncServer();
         private List<int> m_ClientIndexs = new List<int>();
+        private delegate void DeleString(string arg);
+        private delegate void DeleVoid();
 
         //模拟数据
         private System.Timers.Timer _simTimer;
@@ -76,7 +78,7 @@ namespace RoboticArmMWC2016
         //客户端连线
         void asyncServer_onConnected(int index, string ip)
         {
-            string message = string.Format("{0}连线!", ip);
+            string message = string.Format("{0}连线!\n", ip);
             this.Invoke(new DeleString(SetText), new object[] { message });
             System.Threading.Thread.Sleep(100);
             if (!m_ClientIndexs.Contains(index))
@@ -88,7 +90,7 @@ namespace RoboticArmMWC2016
         //客户端断线
         void asyncServer_onDisconnected(int index, string ip)
         {
-            string message = string.Format("{0}断线!", ip);
+            string message = string.Format("{0}断线!\n", ip);
             LogHelper.GetInstance().ShowMsg(message);
             if (m_ClientIndexs.Contains(index))
             {
@@ -120,7 +122,28 @@ namespace RoboticArmMWC2016
 
         private void DealMsg(string msg)
         {
-            
+            string msgType = msg.Split(':')[0];
+            string msgArg = msg.Split(':')[1];
+            switch (msgType)
+            {
+                case "pattern":
+                    this.Invoke(new DeleString(SetRobotPattern), msgArg);
+                    break;
+                case "control":
+                    if (msgArg == "calibrate")
+                    {
+                        this.Invoke(new DeleVoid(StartCalibrate));
+                    }
+                    else if (msgArg == "stopCalibrate")
+                    {
+                        this.Invoke(new DeleVoid(StopCalibrate));
+                    }
+                    break;
+                case "forward":
+                    string toSend = msgArg;
+                    this.Invoke(new DeleString(SendtoRobot), toSend);
+                    break;
+            }
         }
         #endregion
 
@@ -132,6 +155,34 @@ namespace RoboticArmMWC2016
 
             _robotHandler = new RoboticArm.RobotHandler(_config.RobotIP, _config.RobotPort,interType,_config.RobotPatternPort);
             _robotHandler.MaxVelocity = _config.ReflectVelocity;
+        }
+
+        private void SetRobotPattern(string patternName)
+        {
+            _robotHandler.SetPattern(patternName);
+            if (patternName == "playhockey")
+            {
+                _motionPointManager.StartDetect();
+            }
+            else
+            {
+                _motionPointManager.StopDetect();
+            }
+        }
+
+        private void StartCalibrate()
+        {
+            _motionPointManager.StartCalibrate();
+        }
+
+        private void StopCalibrate()
+        {
+            _motionPointManager.EndCalibrate();
+        }
+
+        private void SendtoRobot(string msg)
+        {
+            _robotHandler.Send(msg);
         }
 
         private void InitConfig()
@@ -180,7 +231,8 @@ namespace RoboticArmMWC2016
         }
         #endregion
 
-        private delegate void DeleString(string arg);
+        
+
         public void ShowLog(string msg)
         {
             this.Invoke(new DeleString(SetText), msg);
@@ -225,20 +277,17 @@ namespace RoboticArmMWC2016
 
         private void button9_Click(object sender, EventArgs e)
         {
-            _robotHandler.SetPattern("playhockey");
-            _motionPointManager.StartDetect();
+            SetRobotPattern("playhockey");
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-            _robotHandler.SetPattern("drawing");
-            _motionPointManager.StopDetect();
+            SetRobotPattern("drawing");
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            _robotHandler.SetPattern("dancing");
-            _motionPointManager.StopDetect();
+            SetRobotPattern("dancing");
         }
     }
 }

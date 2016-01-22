@@ -71,5 +71,10 @@ namespace RoboticArm
         {
             _patternSender.SendtoRoboticArm(patternName + "\r\n");
         }
+
+        public void Send(string msg)
+        {
+            _patternSender.SendtoRoboticArm(msg+"\r\n");
+        }
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Data>
     <ServerPort>8898</ServerPort>
-    <MachineIP>172.31.1.147</MachineIP>
+    <MachineIP>127.0.0.1</MachineIP>
   <MachinePort>30001</MachinePort>
     
     <DrawAngle>30</DrawAngle>

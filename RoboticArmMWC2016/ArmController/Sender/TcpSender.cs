@@ -66,7 +66,7 @@ namespace RoboticArm.Sender
 
         void client_onDisConnect()
         {
-            LogHelper.GetInstance().ShowMsg("断线!");
+            //LogHelper.GetInstance().ShowMsg("断线!");
             asyncTimer.Start();
         }
 
